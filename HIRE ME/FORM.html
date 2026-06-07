@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Account Form</title>
+    <style>
+        * { box-sizing: border-box; font-family: Arial, Helvetica, sans-serif; }
+        body {
+            margin: 0;
+            height: 100vh;
+            background: linear-gradient(120deg, #6a85b6, #bac8e0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+        }
+        .epic-text {
+            text-align: center;
+            color: #fff;
+            margin-bottom: 20px;
+        }
+        .epic-text span { font-size: 20px; color: #f0f0f0; }
+        .form-container {
+            background: #fff;
+            width: 420px;
+            padding: 35px;
+            border-radius: 10px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+        .form-container h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            letter-spacing: 1px;
+        }
+        label {
+            font-size: 14px;
+            display: block;
+            margin-bottom: 6px;
+            margin-top: 15px;
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="number"],
+        input[type="file"],
+        textarea {
+            width: 100%;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+            outline: none;
+        }
+        textarea { resize: none; }
+        input:focus, textarea:focus { border-color: #6a85b6; }
+        .submit-btn {
+            width: 100%;
+            margin-top: 25px;
+            padding: 12px;
+            border: none;
+            border-radius: 25px;
+            background: linear-gradient(to right, #6a85b6, #8fd3f4);
+            color: white;
+            font-size: 15px;
+            cursor: pointer;
+        }
+        .submit-btn:hover { opacity: 0.9; }
+    </style>
+</head>
+<body>
+
+<h1 class="epic-text">
+    HELLO i am a Full stack developer <br>
+    <span>A project maker as you want</span>
+</h1>
+
+<div class="form-container">
+    <h2>PROJECT DETAILS</h2>
+
+    <!-- Fixed form -->
+    <form id="contactForm">
+        <label for="name">Name</label>
+        <input type="text" id="name" name="name" required>
+
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required>
+
+        <label for="phone">Phone Number</label>
+        <input type="number" id="phone" name="phone" required>
+
+        <label for="project">Your Project Title</label>
+        <input type="text" id="project" name="project" required>
+
+        <label for="brief">Brief Your Project</label>
+        <textarea id="brief" name="brief" rows="4" placeholder="Type your message here..." required></textarea>
+
+        <label for="file">Give me all detail on doc</label>
+        <input type="file" id="file" name="file">
+
+        <input type="submit" class="submit-btn" value="SUBMIT">
+    </form>
+</div>
+
+<!-- EmailJS -->
+<script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+<script>
+    // Initialize EmailJS
+    emailjs.init("A9PXLUW8ZaEf2JePa"); // 🔴 Replace with your Public Key
+
+    // Form submit handler
+    document.getElementById("contactForm").addEventListener("submit", function(e) {
+        e.preventDefault();
+
+        emailjs.sendForm(
+            "service_n4h4pnh",   // 🔴 Replace with your Service ID
+            "template_xl5rz9f",  // 🔴 Replace with your Template ID
+            this
+        )
+        .then(function() {
+            alert("✅ Email sent successfully!");
+            document.getElementById("contactForm").reset();
+        })
+        .catch(function(error) {
+            alert("❌ Failed to send email. Check console for details.");
+            console.log(error);
+        });
+    });
+</script>
+
+</body>
+</html>
